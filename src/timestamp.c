@@ -1,3 +1,7 @@
+#include <sys/types.h>
+#include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
 #include "taia.h"
 #include "timestamp.h"
 
@@ -17,4 +21,11 @@ void timestamp(char s[TIMESTAMP])
     s[i * 2 + 1] = hex[(nowpack[i] >> 4) & 15];
     s[i * 2 + 2] = hex[nowpack[i] & 15];
   }
+}
+
+void iso_timestamp(char s[TIMESTAMP])
+{
+  time_t now = time(NULL);
+  struct tm *tm = gmtime(&now);
+  strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ     ", tm);
 }

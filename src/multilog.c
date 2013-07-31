@@ -514,7 +514,7 @@ void doit(char **script)
       }
       if (!linelen)
         if (flagtimestamp) {
-          timestamp(line);
+          iso_timestamp(line);
           line[25] = ' ';
           linelen = 26;
         }
