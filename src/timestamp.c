@@ -25,7 +25,10 @@ void timestamp(char s[TIMESTAMP])
 
 void iso_timestamp(char s[TIMESTAMP])
 {
+  int len;
   time_t now = time(NULL);
   struct tm *tm = gmtime(&now);
-  strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ     ", tm);
+  // the string has to be 24 characters
+  len = strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ    ", tm);
+  s[len] = ' ';
 }
