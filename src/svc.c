@@ -31,7 +31,7 @@ int main(int argc,const char *const *argv)
 
   while ((opt = getopt(argc,argv,"?vudopchaitkx")) != opteof)
     if (opt == 'v'){
-      puts("version: 0.2");
+      puts("version: 0.76c");
       exit(0);
     }
     else if (opt == '?')
