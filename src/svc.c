@@ -1,4 +1,6 @@
 #include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "ndelay.h"
 #include "strerr.h"
 #include "error.h"
@@ -27,8 +29,12 @@ int main(int argc,const char *const *argv)
 
   sig_ignore(sig_pipe);
 
-  while ((opt = getopt(argc,argv,"udopchaitkx")) != opteof)
-    if (opt == '?')
+  while ((opt = getopt(argc,argv,"?vudopchaitkx")) != opteof)
+    if (opt == 'v'){
+      puts("version: 0.2");
+      exit(0);
+    }
+    else if (opt == '?')
       strerr_die1x(100,"svc options: u up, d down, o once, x exit, p pause, c continue, h hup, a alarm, i interrupt, t term, k kill");
     else
       if (datalen < sizeof data)
