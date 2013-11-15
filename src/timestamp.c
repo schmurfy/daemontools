@@ -1,5 +1,6 @@
 #include <sys/types.h>
 #include <time.h>
+#include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
 #include "taia.h"
@@ -23,12 +24,19 @@ void timestamp(char s[TIMESTAMP])
   }
 }
 
-void iso_timestamp(char s[TIMESTAMP])
+int iso_timestamp(char s[TIMESTAMP])
 {
   int len;
-  time_t now = time(NULL);
-  struct tm *tm = gmtime(&now);
-  // the string has to be 24 characters
-  len = strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ    ", tm);
-  s[len] = ' ';
+  struct tm *tm;
+  
+  struct timeval now;
+  gettimeofday(&now,(struct timezone *) 0);
+  
+  tm = gmtime(&now.tv_sec);
+  
+  // 2013-11-15T03:00:28Z.000000
+  len = strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ", tm);
+  len += sprintf(s + len, ".%06d ", now.tv_usec);
+  
+  return len + 1;
 }

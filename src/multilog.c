@@ -514,9 +514,7 @@ void doit(char **script)
       }
       if (!linelen)
         if (flagtimestamp) {
-          iso_timestamp(line);
-          line[25] = ' ';
-          linelen = 26;
+          linelen = iso_timestamp(line);
         }
       if (ch == '\n')
         break;
