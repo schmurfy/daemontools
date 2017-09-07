@@ -24,6 +24,7 @@ void timestamp(char s[TIMESTAMP])
   }
 }
 
+// 2017-09-07T07:00:58Z.867840
 int iso_timestamp(char s[TIMESTAMP])
 {
   int len;
@@ -38,5 +39,5 @@ int iso_timestamp(char s[TIMESTAMP])
   len = strftime(s, TIMESTAMP, "%Y-%m-%dT%H:%M:%SZ", tm);
   len += sprintf(s + len, ".%06d ", now.tv_usec);
   
-  return len + 1;
+  return len;
 }
